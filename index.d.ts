@@ -21,6 +21,11 @@ declare class Stats {
     addPanel(panel: Stats.Panel): Stats.Panel;
 }
 
+declare interface StatsOptions {
+    width: number,
+    height: number,
+}
+
 declare namespace Stats {
     class Panel {
         constructor(name: string, foregroundColor: string, backgroundColor: string);
@@ -28,10 +33,7 @@ declare namespace Stats {
         update(value: number, maxValue: number): void;
     }
 
-    interface Options {
-        width: number,
-        height: number,
-    }
+    let Options: StatsOptions
 }
 
 declare module 'stats.js' {
