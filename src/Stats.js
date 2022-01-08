@@ -4,7 +4,6 @@
 
 
 var Stats = function () {
-
 	var mode = 0;
 
 	var container = document.createElement( 'div' );
@@ -120,6 +119,8 @@ Stats.Panel = function ( name, fg, bg ) {
 	var min = Infinity, max = 0, round = Math.round;
 	var PR = round( window.devicePixelRatio || 1 );
 
+	console.log('rrr', Stats.options)
+	
 	var WIDTH = Stats.Options.width * PR, HEIGHT = Stats.Options.height * PR,
 			TEXT_X = 3 * PR, TEXT_Y = 2 * PR,
 			GRAPH_X = 3 * PR, GRAPH_Y = 15 * PR,
