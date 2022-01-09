@@ -3,7 +3,7 @@
  */
 
 
-var Stats = function () {
+var Stats = function ( defaultPanels = null ) {
 	var mode = 0;
 
 	var container = document.createElement( 'div' );
@@ -40,20 +40,29 @@ var Stats = function () {
 
 	var beginTime = ( performance || Date ).now(), prevTime = beginTime, frames = 0;
 
-	var fpsPanel = addPanel( new Stats.Panel( 'FPS', '#0ff', '#002' ) );
-	var msPanel = addPanel( new Stats.Panel( 'MS', '#0f0', '#020' ) );
+	var fpsPanel, msPanel, memPanel;
+	if (defaultPanels) {
+		if (Array.isArray(defaultPanels)) {
+			for (var i = 0; i < defaultPanels.length; i++) {
+				addPanel(defaultPanels[i]);
+			}
 
-	if ( self.performance && self.performance.memory ) {
+			showPanel(0);
+		}
+	} else {
+		fpsPanel = addPanel(new Stats.Panel('FPS', '#0ff', '#002'));
+		msPanel = addPanel(new Stats.Panel('MS', '#0f0', '#020'));
 
-		var memPanel = addPanel( new Stats.Panel( 'MB', '#f08', '#201' ) );
+		if (self.performance && self.performance.memory) {
+			memPanel = addPanel(new Stats.Panel('MB', '#f08', '#201'));
+		}
 
+		showPanel(0);
 	}
-
-	showPanel( 0 );
 
 	return {
 
-		REVISION: 16,
+		REVISION: 17,
 
 		dom: container,
 
@@ -72,11 +81,15 @@ var Stats = function () {
 
 			var time = ( performance || Date ).now();
 
-			msPanel.update( time - beginTime, 200 );
+			if (msPanel) {
+				msPanel.update(time - beginTime, 200);
+			}
 
 			if ( time >= prevTime + 1000 ) {
 
-				fpsPanel.update( ( frames * 1000 ) / ( time - prevTime ), 100 );
+				if (fpsPanel) {
+					fpsPanel.update((frames * 1000) / (time - prevTime), 100);
+				}
 
 				prevTime = time;
 				frames = 0;

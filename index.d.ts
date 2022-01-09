@@ -6,7 +6,7 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 declare class Stats {
-    constructor();
+    constructor(defaultPanels?: Array<Stats.Panel> | null);
     REVISION: number;
     dom: HTMLDivElement;
 
