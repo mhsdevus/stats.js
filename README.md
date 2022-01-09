@@ -1,3 +1,10 @@
+Customizations (mhsdevus)
+==============
+
+* Incorporate the TS definitions from DefinitelyTyped into the package.
+* Define a `Stats.Options` object to set the width/height of the stats panels/canvas.
+* Support for a `defaultPanels` parameter, to allow user to omit the default FPS+MS+MEM panels and optionally provide a custom set of Stats.Panel.
+
 stats.js
 ========
 
